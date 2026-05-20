@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مايكروسوفت وإسرائيل</title>
+  <style>
+
+    {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      direction: rtl;
+      text-align: right;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      padding-top: 0px;
+      background: #fff;
+    }
+    .main-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .title {
+      margin-top: 20px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .short-description {
+      color: #bbb;
+      font-style: italic;
+      font-size: 1.5em;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+    
+    }
+    .long-description {
+      margin-top: 20px;
+    }
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      padding: 10px;
+      pointer-events: none;
+    }
+    .section {
+      margin-top: 40px;
+    }
+    .section h2 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+    .related-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .related-items .item {
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .related-items .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .related-items .item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+    .related-items .item .info {
+      padding: 10px;
+    }
+    .related-items .item .info h3 {
+      margin: 0;
+      font-size: 1em;
+    }
+    .related-items .item .info p {
+      margin: 5px 0 0;
+      font-size: 0.85em;
+      color: #777;
+    }
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .share-buttons a {
+      text-decoration: none;
+      padding: 10px 15px;
+      color: #000;
+      border-radius: 5px;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }.share-buttons a:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+.share-buttons a img {
+  width: 20px;
+  height: 20px;
+}
+    .share-buttons a.facebook { background-color: #EEEEEE; }
+    .share-buttons a.twitter { background-color: #EEEEEE; }
+    .share-buttons a.bluesky { background-color: #9ac9ff; }
+    .share-buttons a.mastodon { background-color: #aab0ff; }
+      .link-list {
+      list-style: disc inside;
+      padding-right: 20px;
+      margin-top: 10px;
+    }
+    .link-list li {
+      margin: 8px 0;
+    }
+    .link-list a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+    .lightbox video {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+        /* معرض الوسائط الأفقي */
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+    .gallery::-webkit-scrollbar {
+      height: 8px;
+    }
+    .gallery::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    .gallery::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+    .gallery-item {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 120px;
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    /* نافذة Lightbox بسيطة */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .lightbox-overlay img,
+    .lightbox-overlay video {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .lightbox-overlay .close-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+    }
+    .sources-wrap {
+      overflow-x: auto;
+    }
+
+    .sources-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .sources-table thead th {
+      background: #f5f5f5;
+      font-weight: bold;
+      text-align: right;
+      padding: 14px 16px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .sources-table tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #eee;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    .sources-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    .sources-table tbody tr:hover {
+      background: #f0f7ff;
+      transition: 0.2s ease;
+    }
+
+    .sources-table td:first-child,
+    .sources-table th:first-child {
+      width: 60px;
+      text-align: center;
+    }
+
+    .sources-table a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    .sources-table a:hover {
+      text-decoration: underline;
+    }
+ 
+</style>
+</head>
+<body>
+  
+  <div class="container">
+    <!-- باقي المحتوى يبقى كما هو -->
+    <img src="pic.png" alt="الصورة الرئيسية" class="main-image">
+    <div class="title">مايكروسوفت وإسرائيل | تقرير ديناميكي</div>
+    <br />
+    <div class="share-buttons">
+        <a class="facebook" href="timeline.html" target="_blank"> 
+          <img src="timeline_icon.png" alt=" عرض الجدول الزمني"> عرض الجدول الزمني
+        </a>
+    </div>	
+    <br />
+    <div class="short-description">«إسرائيل مركز للابتكار التكنولوجي، ومايكروسوفت شركة تكنولوجية عظيمة. 
+إنها زواج صُنِع في السماء، لكن تم الاعتراف به هنا على الأرض.» <br />
+ ~ بينيامين نتنياهو  2016   
+[<a href="https://www.israelnationalnews.com/news/208568" target="_blank" >1</a>]
+</div>
+    <div class="long-description">
+<h4> أول مركز للبحث والتطوير لمايكروسوفت خارج أمريكا</h4>
+<p>تحافظ مايكروسوفت على علاقات وثيقة مع الدولة الإسرائيلية من خلال تعاونها مع الجيش الإسرائيلي، ومع الشركات الناشئة الإسرائيلية. 
+فقد كان لشركة مايكروسوفت حضور كبير في إسرائيل منذ أوائل تسعينيات القرن الماضي.
+واختارت الشركة اسرائيل عام 1991م لتقيم بها أول مركز للبحث والتطوير لمايكروسوفت خارج الولايات المتحدة الأمريكية  [<a href="https://www.israelnationalnews.com/news/208568" target="_blank" >2</a>].
+</p>
+
+<h4>شركة تشيك بوينت</h4>
+<p>
+ كما ارتبطت مايكروسوفت مثلا بشراكة طويلة الأمد مع شركة تشيك بوينت منذ منتصف التسعينات، وهي شركة إسرائيلية كبرى في مجال الأمن السيبراني، وليس سرا أن مؤسسها (جيل شويد) قد خدم في الوحدة ثمانية مائتان 8200 التابعة للاستخبارات العسكرية الإسرائيلية، وهي وحدة سيبرانية واستخباراتية رئيسية داخل الجيش الإسرائيلي [<a href="https://partner.microsoft.com/en-jo/case-studies/checkpoint-case-study" target="_blank" >10</a>]. 
+</p>
+
+<h4>تعاون مايكروسوفت مع اسرائيل أثناء انتفاضة الأقصى</h4>
+<center> <img src="billboard.jpg" /><br />
+لوحات مايكروسوفت إسرائيل في تل أبيب: ("من أعماق قلوبنا – شكراً لقوات الدفاع الإسرائيلية"). [<a href="https://mondoweiss.net/2021/03/how-microsoft-is-invested-in-israeli-settler-colonialism/" target="_blank" >3</a>] [<a href="https://www.researchgate.net/figure/A-2002-Microsoft-billboard-bluntly-supported-the-Israeli-army-during-the-war-in-Gaza_fig1_260139511" target="_blank" >4</a>]
+
+ </center>
+
+
+<p> يبدو أن أقدم توثيق لحملة منظمة لمقاطعة مايكروسوفت على خلفية ارتباطها بإسرائيل كانت في اوائل الألفية عندما 
+دعت حركة (جش شالوم)، وهي حركة إسرائيلية مستقلة داعمة للسلام وحل الدولتين تأسست في أوائل التسعينيات، إلى حملة لمقاطعة شركة مايكروسوفت احتجاجاً على لوحات إعلانية مؤيدة للجيش الإسرائيلي وضعتها مايكروسوفت في شوارع تل أبيب الرئيسية أبريل 2002 خلال الانتفاضة الثانية (انتفاضة الأقصى). أوضح مسؤولو مايكروسوفت العالمية أن هذه الخطوة اتخذها الفرع الإسرائيلي دون موافقة المقر الرئيسي، وتمت إزالة اللوحات. 
+ [<a href="https://mondoweiss.net/2021/03/how-microsoft-is-invested-in-israeli-settler-colonialism/" target="_blank" >3</a>]  [<a href="https://www.inminds.com/boycott-news-0022.html" target="_blank" >5</a>] 
+</p>
+
+<p>
+خلال نفس السنة (2002) وقعت وزارة الدفاع وشركة مايكروسوفت اتفاقية لشراء منتجات برمجية تبلغ قيمتها نحو 100 مليون شيكل.
+
+عدت وقتها أكبر اتفاقية يتم توقيعها في إسرائيل في مجال ترخيص البرمجيات. وبموجب الاتفاقية، قامت الشركة بتزويد جيش الدفاع الإسرائيلي ووزارة الدفاع وفروع الأمن الأخرى بمنتجات برمجية بكميات غير محدودة، وخدمات التنفيذ والتوطين، والدعم، والخدمات لمدة 3 سنوات.
+
+وكجزء من الاتفاق، اشترت المؤسسة الدفاعية أيضًا منتجات أمن أنظمة الكمبيوتر الخاصة بشركة مايكروسوفت، وتعتمد حلول أمن المعلومات الخاصة بالجيش الإسرائيلي والمؤسسة الدفاعية عليها. وتناول جزء آخر من الاتفاقية أيضًا التعاون في مجال المعرفة بين جيش الدفاع الإسرائيلي ومايكروسوفت.  [<a href="https://www.whoprofits.org/companies/company/7371" target="_blank" >6</a>]  [<a href="https://www.ynet.co.il/articles/0,7340,L-2302074,00.html" target="_blank" >7</a>] 
+</p>
+
+    <div class="short-description">«مايكروسوفت شركة إسرائيلية بقدر ما هي شركة أمريكية.» <br />
+ ~ ستيف بالمر - مدير مايكروسوفت الأسبق 2008	  
+[<a href="https://www.jpost.com/business/business-features/article-101938" target="_blank" >8</a>] [<a href="https://www.haaretz.com/2008-05-21/ty-article/microsoft-ceo-in-herzliya-our-company-almost-as-israeli-as-american/0000017f-e2f6-d9aa-afff-fbfe2de30000" target="_blank" >9</a>]
+</div>
+
+<h4>سلسلة استحواذات على شركات اسرائيلية ناشئة</h4>
+
+<p>استحوذت مايكروسوفت بين عامي 2014 و 2022 على عدد من شركات تكنولوجيا إسرائيلية، خاصة في مجال الأمن السيبراني والحوسبة السحابية وتحليلات البيانات. </p>
+<ul>
+<li>Aorato (2014) → أصبحت جزءًا من Microsoft Defender for Identity
+<li>Adallom (2015) → تحولت إلى Microsoft Defender for Cloud Apps
+<li>Secure Islands (2015) → دعمت قدرات Azure Information Protection وMicrosoft Purview Information Protection
+<li>Hexadite (2017) → دعمت قدرات التحقيق والاستجابة التلقائية في Microsoft Defender XDR
+<li>CyberX (2020) → عززت أمن أجهزة انترنت الأشياء ضمن Microsoft Defender for IoT
+<li>Peer5 (2021) → حسّنت أداء Microsoft Teams
+<li>Oribi (2022) → تحليلات التسويق الرقمي وسلوك المستخدم - لم يتم الإعلان عن منتج محدد
+</ul>
+
+
+
+<h4>مايكروسوفت ومصلحة السجون الإسرائيلية </h4>
+<p>
+لم يتم الاستدلال على مصادر صحفية موثوقة لما ورد عن تلقي مصلحة السجون الإسرائيلية خدمات استشارية وبرمجية من مايكروسوفت منذ عام 2017. 
+  [<a href="https://www.whoprofits.org/companies/company/7371" target="_blank" >6</a>]
+
+</p>
+
+<h4>تمويل شركة إني-فيجن </h4>
+<p>
+في عام 2020، واجهت مايكروسوفت ضغوطًا من موظفين ومنظمات حقوقية بسبب استثمار صندوقها الاستثماري إم 12 في شركة إني-فيجن الإسرائيلية المتخصصة في تقنيات التعرّف على الوجوه، بما في ذلك مزاعم استخدام تقنيات الشركة في مراقبة الفلسطينيين في الضفة الغربية. وبعد مراجعة مستقلة، أعلنت مايكروسوفت أنها ستبيع حصتها في الشركة كما أكدت أنها لن تستثمر بعد الآن في حصص غير مسيطرة في الشركات التي تطور أو تبيع تكنولوجيا مثيرة للجدل. 
+
+بذلك تكون هذه الضغوط قد أدت بنجاح إلى انسحاب صندوق إم 12، الذراع الاستثمارية التابعة لمايكروسوفت، من الاستثمار الذي كان جزءًا من جولة تمويل بلغت قيمتها 74 مليون دولار أمريكي.
+[<a href="https://www.reuters.com/article/technology/microsoft-to-divest-anyvision-stake-end-face-recognition-investing-idUSKBN21E3BA/" target="_blank" >18</a>] [<a href="https://m12.vc/news/joint-statement-by-microsoft-anyvision/" target="_blank" >19</a>]
+</p>
+
+<h4>أزور والبيت سيستمز </h4>
+
+<p> تُعد إلبيت سيستمز من أبرز شركات الصناعات الدفاعية في إسرائيل، حيث تطوّر تقنيات عسكرية وطائرات مسيّرة وأنظمة مراقبة تُستخدم من قبل الجيش الإسرائيلي.
+
+وفي عام 2022، أعلنت الشركة أن نظام المحاكاة العسكرية الجديد الخاص بها، وان سيم، سيعتمد على منصة مايكروسوفت أزور السحابية بعد "العمل عن كثب مع مهندسي مايكروسوفت" 
+  [<a href="https://www.elbitsystems.com/news/elbit-systems-simulation-infrastructure-becomes-cloud-native" target="_blank" >11</a>].
+
+
+وبموجب عقد تبلغ قيمته 107 ملايين دولار أمريكي، أعلنت شركة البيت سيستمز بعدها ببضعة شهور أن هذا النظام سيُستخدم في مراكز تدريب متقدمة للجيش الإسرائيلي لمحاكاة سيناريوهات قتالية واقعية لتدريب أطقم الدبابات
+  [<a href="https://www.elbitsystems.com/news/elbit-systems-awarded-107-million-contract-israeli-mod-supply-advanced-armor-training-centers" target="_blank" >12</a>].
+</p>
+
+<h4>أزور وبالانتير </h4>
+
+<p>
+أعلنت مايكروسوفت وبالانتير رسميًا في عام 2019 أن منصات بالانتير الأساسية — فاوندري وغوثام — ستعمل على منصة مايكروسوفت أزور. وبذلك أصبحت مايكروسوفت أزور البنية السحابية التي تستضيف وتدعم بعض أهم منتجات بالانتير الموجّهة للعملاء الحكوميين والاستخباراتيين والعسكريين.
+
+[<a href="https://www.palantir.com/partnerships/microsoft/" target="_blank" >13</a>] [<a href="https://news.microsoft.com/source/2024/08/08/palantir-and-microsoft-partner-to-deliver-enhanced-analytics-and-ai-services-to-classified-networks-for-critical-national-security-operations/" target="_blank" >14</a>].
+
+وفي يناير 2024،
+اتفقت بالانتير على شراكة استراتيجية مع وزارة الدفاع الإسرائيلية لتزويدها بتكنولوجيا تهدف إلى دعم المجهود الحربي الإسرائيلي.
+[<a href="https://www.bloomberg.com/news/articles/2024-01-12/palantir-israel-agree-to-strategic-partnership-for-battle-tech" target="_blank" >15</a>]
+
+</p>	
+
+ <div class="short-description"> «يُستخدم منتجنا أحيانًا لقتل أشخاص.» <br />
+ ~  أليكس كارب، الرئيس التنفيذي لشركة بالانتير 2020 
+[<a href="https://www.youtube.com/watch?v=ChwSTuDa9RY" target="_blank" >16</a>] [<a href="https://www.inverse.com/input/tech/palantir-ceo-alex-karp-says-yes-their-tech-is-used-to-kill-people" target="_blank" >17</a>]
+
+
+</div>
+
+
+<p> 2025.04.04 مايكروسوفت | فانيا تقاطع مدير مايكروسوفت للاحتجاج</p>
+<p> 
+2025.05.19 مايكروسوفت | 
+وفي فعاليات مايكروسوفت الأخيرة أثناء مؤتمر "بيلد" الشهر الماضي، قام موظف بمقاطعة كلمة الرئيس التنفيذي ساتيا ناديلا، داعيا إلى "حرية فلسطين". 
+</p>
+
+<p> 2025.05.15 مايكروسوفت | غلق إيميل كريم خان</p>
+
+
+<p> 2025.08.26 مايكروسوفت | مايكروسوفت ترفد موظفين على خلفية احتجاجهم </p>
+
+
+<p> 2025.09.25 مايكروسوفت | مايكروسوفت تعلق استخدام خدماتها من قبل اسرائيل </p>
+
+<p> 2025.10.21 مايكروسوفت | مدير مايكروسوفت يحصل على 96 مليون دولار مكافأة </p>
+
+<p>2025.12.04 مايكروسوفت | مجموعة حقوقية تطالب السلطات الأيرلندية بالتحقيق في استخدام مايكروسوفت تخزين سحابي في ايرلندا</p>
+
+
+<p> 2025.12.29 خطاب ياسين الأخير </p>
+
+<p> 2026.02.10 مايكروسوفت | جلسة البرلمان البريطاني</p>
+
+<p>2026.03.18 مايكروسوفت | مطوري أحد الألعاب يردّون تمويل مايكروسوفت دعما لحركة "لا ألعاب للإبادة"</p>
+
+<p>2026.05.11 مايكروسوفت | الإطاحة برئيس مايكروسوفت اسرائيل</p>
+
+
+
+
+    </div>
+
+
+
+<div class="section">
+  <h2>روابط ذات صلة</h2>
+مرتبة بالتاريخ من الأحدث للأقدم <br /> <br />
+  <div class="sources-wrap">
+    <table class="sources-table">
+      <thead>
+        <tr>
+          <th>م</th>
+          <th>التاريخ</th>
+          <th>الجهة</th>
+          <th>العنوان / الرابط</th>
+        </tr>
+      </thead>
+      <tbody>
+
+         <tr>
+      <td>1</td>
+      <td>-</td>
+      <td>ويكيبيديا</td>
+      <td><a href="https://en.wikipedia.org/wiki/Criticism_of_Microsoft" target="_blank" rel="noopener noreferrer">Criticism of Microsoft</a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>-</td>
+      <td>حركة لا ألعاب للإبادة</td>
+      <td><a href="https://nogamesforgenocide.com/" target="_blank" rel="noopener noreferrer">No Games for Genocide</a></td>
+    </tr>
+     <tr>
+      <td>1</td>
+      <td>-</td>
+      <td>who profits</td>
+      <td><a href="https://www.whoprofits.org/companies/company/7371" target="_blank" rel="noopener noreferrer">Who Profits - Microsoft</a></td>
+    </tr>
+    </tr>
+     <tr>
+      <td>1</td>
+      <td>-</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://partner.microsoft.com/en-jo/case-studies/checkpoint-case-study" target="_blank" rel="noopener noreferrer">Check Point case study</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2026.05.13</td>
+      <td>تايمز اسرائيل</td>
+      <td><a href="https://www.timesofisrael.com/microsoft-israel-head-ousted-reportedly-over-idfs-controversial-use-of-cloud-tech/" target="_blank" rel="noopener noreferrer">Microsoft Israel head ousted reportedly over IDF’s controversial use of cloud tech</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2026.05.13</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2026/5/13/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%82%D9%8A%D9%84-%D9%85%D8%AF%D9%8A%D8%B1%D9%87%D8%A7-%D9%81%D9%8A-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84" target="_blank" rel="noopener noreferrer">مايكروسوفت تقيل مديرها في إسرائيل وهذه هي الأسباب</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>2026.05.12</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2026/may/12/microsoft-head-israel-step-down" target="_blank" rel="noopener noreferrer">Head of Microsoft’s Israel branch to step down after inquiry into dealings with Israeli military</a></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2026.05.12</td>
+      <td>موقع ويندوز سنترال</td>
+      <td><a href="https://www.windowscentral.com/microsoft/unethical-use-of-azure-reportedly-leads-to-the-firing-of-microsoft-israel-leaders-investigations-into-israels-use-of-microsoft-products-to-target-palestine-continues" target="_blank" rel="noopener noreferrer">Unethical use of Azure" reportedly leads to firing of Microsoft Israel execs — Microsoft has been investigating potential abuse of its products in targeting Palestinians</a></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>2026.05.11</td>
+      <td>مجلة بي سي جيمر</td>
+      <td><a href="https://www.pcgamer.com/gaming-industry/microsoft-fires-head-of-israeli-subsidiary-and-other-managers-over-surveillance-of-palestinians/" target="_blank" rel="noopener noreferrer">Microsoft fires head of Israeli subsidiary and other managers over surveillance of Palestinians</a></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>2026.05.11</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2026/5/11/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%AD%D8%A9-%D8%A8%D9%85%D8%AF%D9%8A%D8%B1-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84-%D8%A8%D8%B9%D8%AF" target="_blank" rel="noopener noreferrer">الإطاحة بمدير "مايكروسوفت إسرائيل" بعد تحقيق عن دعم المؤسسات الأمنية</a></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>2026.03.18</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/games/2026/mar/18/pushing-buttons-microsoft-indie-game-all-will-rise-no-games-for-genocide" target="_blank" rel="noopener noreferrer">Why an up-and-coming indie developer is returning Microsoft’s money</a></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>2026.03.15</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/us-news/ng-interactive/2026/mar/15/ai-defense-warfare-companies" target="_blank" rel="noopener noreferrer">These aren’t AI firms, they’re defense contractors. We can’t let them hide behind their models</a></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>2026.02.26</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2026/feb/26/how-to-replace-amazon-google-x-meta-apple-alternatives" target="_blank" rel="noopener noreferrer">Leave big tech behind! How to replace Amazon, Google, X, Meta, Apple – and more</a></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>2026.02.18</td>
+      <td>ذا ريجستر</td>
+      <td><a href="https://www.theregister.com/off-prem/2026/02/18/microsoft-throws-spox-under-the-bus-in-icc-email-flap/4890338" target="_blank" rel="noopener noreferrer">Microsoft throws spox under the bus after Parliament testimony on ICC email kerfuffle</a></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>2026.02.17</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/commentisfree/2026/feb/17/europeans-are-dangerously-reliant-on-us-tech-now-is-a-good-time-to-build-our-own" target="_blank" rel="noopener noreferrer">Europeans are dangerously reliant on US tech. Now is a good time to build our own</a></td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>2026.02.10</td>
+      <td></td>
+      <td>https://parliamentlive.tv/event/index/76c1f031-30d1-4a86-a27b-95e6acb7315e</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>2026.02.03</td>
+      <td>فولكس كرانت</td>
+      <td><a href="https://www.volkskrant.nl/tech/afhankelijk-van-big-tech-zet-die-amerikaanse-cloud-eens-uit-en-zie-wat-er-dan-gebeurt-bepleit-ict-expert~b27ec9a1/?referrer=https%3A%2F%2Fwww.theregister.com%2F" target="_blank" rel="noopener noreferrer">Afhankelijk van big tech? Zet die Amerikaanse cloud eens uit en zie wat er dan gebeurt, bepleit ict-expert</a></td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2026.02.01</td>
+      <td>واشنطن بوست</td>
+      <td><a href="https://www.washingtonpost.com/technology/2026/02/01/google-ai-israel-military/" target="_blank" rel="noopener noreferrer">Google helped Israeli military contractor with AI, whistleblower alleges</a></td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2025.12.30</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/dec/30/israeli-military-big-tech" target="_blank" rel="noopener noreferrer">‘Data is control’: what we learned from a year investigating the Israeli military’s ties to big tech</a></td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>2025.12.04</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/dec/04/irish-authorities-asked-to-investigate-microsoft-over-alleged-unlawful-data-processing-by-idf" target="_blank" rel="noopener noreferrer">Irish authorities asked to investigate Microsoft over alleged unlawful data processing by IDF</a></td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>2025.11.13</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/11/13/%D9%88%D9%88%D9%84-%D8%B3%D8%AA%D8%B1%D9%8A%D8%AA-%D8%AC%D9%88%D8%B1%D9%86%D8%A7%D9%84-%D8%AD%D8%B1%D8%A8-%D8%BA%D8%B2%D8%A9-%D9%83%D8%A7%D9%86%D8%AA-%D8%A3%D9%8A%D8%B6%D8%A7-%D9%81%D8%AA%D8%AD%D8%A7" target="_blank" rel="noopener noreferrer">وول ستريت جورنال: الشركات الأميركية جنت مليارات الدولارات من الحرب على غزة</a></td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>2025.11.12</td>
+      <td>وول ستريت جورنال</td>
+      <td><a href="https://www.wsj.com/world/middle-east/the-gaza-war-has-been-big-business-for-u-s-companies-8830b54a" target="_blank" rel="noopener noreferrer">The Gaza War Has Been Big Business for U.S. Companies</a></td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>2025.11.09</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/11/9/%D9%82%D8%B5%D8%A9-%D8%A7%D8%B3%D8%AA%D9%82%D8%A7%D9%84%D8%A9-%D9%85%D9%87%D9%86%D8%AF%D8%B3-%D8%B9%D8%B1%D8%A7%D9%82%D9%8A-%D9%85%D9%86-%D9%85%D9%8A%D8%AA%D8%A7-%D8%A8%D8%B3%D8%A8%D8%A8" target="_blank" rel="noopener noreferrer">قصة استقالة مهندس عراقي من "ميتا" بسبب غزة</a></td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2025.10.31</td>
+      <td>ذا ريجستر</td>
+      <td><a href="https://www.theregister.com/software/2025/10/31/international-criminal-court-dumps-microsoft-office/680564?_gl=1*q38rxt*_ga*NzQxMDE3NzA4LjE3MDQ4MDY3MzY.*_ga_JXW44Y23NM*czE3NzEwMDIwODYkbzI1NTEkZzEkdDE3NzEwMDIzODkkajQ5JGwwJGgw" target="_blank" rel="noopener noreferrer">International Criminal Court kicks Microsoft Office to the curb</a></td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>2025.10.29</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/us-news/2025/oct/29/google-amazon-israel-contract-secret-code" target="_blank" rel="noopener noreferrer">Revealed: Israel demanded Google and Amazon use secret ‘wink’ to sidestep legal orders</a></td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>2025.10.26</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/10/26/%D8%A5%D9%86%D8%AA%D8%B1%D8%B3%D8%A8%D8%AA-%D8%B9%D9%85%D9%82-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D8%A7%D9%84%D8%B3%D8%B1%D9%8A-%D8%A8%D9%8A%D9%86-%D8%A3%D9%85%D8%A7%D8%B2%D9%88%D9%86" target="_blank" rel="noopener noreferrer">إنترسبت: كيف تورطت أمازون في جرائم إسرائيل بغزة؟</a></td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>2025.10.22</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/10/22/%D9%85%D8%AF%D9%8A%D8%B1-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%8A%D8%AD%D8%B5%D9%84-%D8%B9%D9%84%D9%89-96-%D9%85%D9%84%D9%8A%D9%88%D9%86-%D8%AF%D9%88%D9%84%D8%A7%D8%B1" target="_blank" rel="noopener noreferrer">مدير مايكروسوفت يحصل على 96 مليون دولار مكافأة</a></td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>2025.10.21</td>
+      <td>بلومبرج</td>
+      <td><a href="https://www.bloomberg.com/news/articles/2025-10-21/microsoft-ceo-gets-96-million-pay-package-on-exceptional-year" target="_blank" rel="noopener noreferrer">Microsoft CEO Gets $96 Million Pay Package on ‘Exceptional’ Year</a></td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>2025.10.14</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/10/14/%D8%A3%D9%85%D8%A7%D8%B2%D9%88%D9%86-%D8%AA%D9%81%D8%B5%D9%84-%D8%A3%D8%AD%D8%AF-%D9%85%D9%88%D8%B8%D9%81%D9%8A%D9%87%D8%A7-%D9%84%D8%A7%D8%B9%D8%AA%D8%B1%D8%A7%D8%B6%D9%87-%D8%B9%D9%84%D9%89" target="_blank" rel="noopener noreferrer">"أمازون" تفصل أحد موظفيها لاعتراضه على تعاونها مع الحكومة الإسرائيلية</a></td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>2025.09.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/9/28/%D9%87%D9%84-%D8%A3%D9%88%D9%82%D9%81%D8%AA-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AD%D9%82%D8%A7-%D8%AA%D8%B9%D8%A7%D9%88%D9%86%D9%87%D8%A7-%D9%85%D8%B9" target="_blank" rel="noopener noreferrer">هل أوقفت "مايكروسوفت" حقا تعاونها مع الجيش الإسرائيلي؟</a></td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>2025.09.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/9/28/%D9%85%D8%AD%D9%84%D9%84%D9%88%D9%86-%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%85-%D8%A8%D8%AF%D8%A3-%D9%8A%D8%B9%D8%A7%D9%85%D9%84-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84-%D9%83%D9%85%D8%A7" target="_blank" rel="noopener noreferrer">محللون: العالم بدأ يعامل إسرائيل كما عامل نظام الأبارتايد في جنوب أفريقيا</a></td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>2025.09.26</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/9/26/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%88%D9%82%D9%81-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84" target="_blank" rel="noopener noreferrer">مايكروسوفت توقف خدمات لإسرائيل وتعترف باستغلالها ضد الفلسطينيين</a></td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>2025.09.26</td>
+      <td>رويترز</td>
+      <td><a href="https://www.reuters.com/ar/world/OLH3BR5BLRIX5NRBCYMYJ27QC4-2025-09-25" target="_blank" rel="noopener noreferrer">مايكروسوفت تعطل خدمات لوحدة تابعة للجيش الإسرائيلي</a></td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>2025.09.25</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/9/25/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%88%D9%82%D9%81-%D9%88%D8%B5%D9%88%D9%84-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84-%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer">مايكروسوفت توقف وصول إسرائيل لتقنية استخدمت لمراقبة الفلسطينيين</a></td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>2025.09.25</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/sep/25/microsoft-blocks-israels-use-of-its-technology-in-mass-surveillance-of-palestinians" target="_blank" rel="noopener noreferrer">Microsoft blocks Israel’s use of its technology in mass surveillance of Palestinians</a></td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2025.09.16</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/sep/16/israel-committed-genocide-in-gaza-says-un-inquiry" target="_blank" rel="noopener noreferrer">Israel has committed genocide in Gaza, says UN commission of inquiry</a></td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>2025.09.04</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/sep/04/israeli-military-database-indicates-only-a-quarter-of-gaza-detainees-are-fighters" target="_blank" rel="noopener noreferrer">Israeli military database indicates only a quarter of Gaza detainees are fighters</a></td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>2025.09.01</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/9/1/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%81%D8%A7%D8%AC%D8%A6-%D8%A7%D9%84%D8%AC%D9%85%D9%8A%D8%B9-%D8%A8%D9%86%D9%85%D8%A7%D8%B0%D8%AC-%D8%B0%D9%83%D8%A7%D8%A1" target="_blank" rel="noopener noreferrer">"مايكروسوفت" تفاجئ الجميع بنماذج ذكاء اصطناعي جديدة تهدد شراكتها مع "أوبن إيه آي"</a></td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>2025.08.29</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.com/news/2025/8/29/microsoft-fires-four-workers-over-protests-against-firms-ties-to-israel" target="_blank" rel="noopener noreferrer">Microsoft fires four workers over protests against firm’s ties to Israel</a></td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>2025.08.29</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/8/29/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%81%D8%B5%D9%84-4-%D9%85%D9%88%D8%B8%D9%81%D9%8A%D9%86-%D8%A7%D8%AD%D8%AA%D8%AC%D9%88%D8%A7-%D8%B9%D9%84%D9%89" target="_blank" rel="noopener noreferrer">مايكروسوفت تفصل 4 موظفين احتجوا على تعاون الشركة مع إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>2025.08.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/8/28/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D8%B7%D8%B1%D8%AF-%D9%85%D9%88%D8%B8%D9%81%D9%8A%D9%86-%D8%A7%D8%AD%D8%AA%D8%AC%D8%A7-%D8%B9%D9%84%D9%89" target="_blank" rel="noopener noreferrer">مايكروسوفت تطرد موظفَين احتجا على تعاونها مع إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>2025.08.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/8/28/%D9%81%D8%B5%D9%84-%D9%85%D9%88%D8%B8%D9%81%D9%8A%D9%86-%D8%A7%D8%AB%D9%86%D9%8A%D9%86-%D8%A8%D8%B9%D8%AF-%D8%A7%D8%B9%D8%AA%D8%B5%D8%A7%D9%85-%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82%D8%A9" target="_blank" rel="noopener noreferrer">فصل موظفيْن بعد اعتصام "المنطقة المحررة" داخل مايكروسوفت</a></td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>2025.08.27</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/8/27/%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D9%84-%D9%85%D9%88%D8%B8%D9%81%D9%8A%D9%86-%D9%81%D9%8A-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AE%D9%84%D8%A7%D9%84" target="_blank" rel="noopener noreferrer">اعتقال موظفين في مايكروسوفت طالبوا بمقاطعة إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>2025.08.26</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/8/26/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D8%AA%D8%B3%D8%A8%D8%A8-%D9%81%D9%8A-%D8%A7%D8%B9%D8%AA%D9%82%D8%A7%D9%84-20-%D9%85%D9%88%D8%B8%D9%81%D8%A7-%D8%A8%D8%B3%D8%A8%D8%A8" target="_blank" rel="noopener noreferrer">مايكروسوفت تتسبب في اعتقال 20 موظفا بسبب الجيش الإسرائيلي</a></td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>2025.08.26</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/us-news/2025/aug/26/microsoft-employee-sit-in-israeli-military-ties" target="_blank" rel="noopener noreferrer">Five current and ex-Microsoft workers arrested at sit-in over Israeli military ties</a></td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>2025.08.21</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/ng-interactive/2025/aug/21/revealed-israeli-militarys-own-data-indicates-civilian-death-rate-of-83-in-gaza-war" target="_blank" rel="noopener noreferrer">Revealed: Israeli military’s own data indicates civilian death rate of 83% in Gaza war</a></td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>2025.08.20</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/8/20/%D8%A7%D8%AD%D8%AA%D8%AC%D8%A7%D8%AC%D8%A7%D8%AA-%D8%B6%D8%AF-%D8%AD%D8%B1%D8%A8-%D8%A7%D9%84%D8%AA%D8%AC%D9%88%D8%B9-%D9%81%D9%8A-%D8%BA%D8%B2%D8%A9" target="_blank" rel="noopener noreferrer">تصاعد موجة الاحتجاجات في العواصم الغربية ضد الحرب على غزة</a></td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>2025.08.20</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/8/20/%D9%85%D9%88%D8%B8%D9%81%D9%88-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%8A%D8%B9%D8%AA%D8%B5%D9%85%D9%88%D9%86-%D9%88%D9%8A%D8%B7%D8%A7%D9%84%D8%A8%D9%88%D9%86" target="_blank" rel="noopener noreferrer">موظفو "مايكروسوفت" يعتصمون ويطالبون بإنهاء العقود مع الجيش الإسرائيلي</a></td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>2025.08.20</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/aug/19/microsoft-workers-protest-washington-israel" target="_blank" rel="noopener noreferrer">Microsoft workers occupy HQ in protest against company’s ties to Israeli military</a></td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>2025.08.15</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/aug/15/microsoft-launches-inquiry-claims-israel-used-tech-mass-surveillance-palestinians" target="_blank" rel="noopener noreferrer">Microsoft launches inquiry into claims Israel used its tech for mass surveillance of Palestinians</a></td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>2025.08.15</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://blogs.microsoft.com/on-the-issues/2025/05/15/statement-technology-israel-gaza/" target="_blank" rel="noopener noreferrer">Microsoft statement on the issues relating to technology services in Israel and Gaza</a></td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>2025.08.14</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/news/audio/2025/aug/14/how-israel-used-microsoft-technology-to-spy-on-palestinians-podcast" target="_blank" rel="noopener noreferrer">How Israel used Microsoft technology to spy on Palestinians – podcast</a></td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>2025.08.10</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/aug/10/activists-in-netherlands-protest-on-roof-of-microsoft-site-storing-israeli-military-data" target="_blank" rel="noopener noreferrer">Activists in Netherlands protest on roof of Microsoft site storing Israeli military data</a></td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>2025.08.09</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/aug/09/microsoft-israeli-military-azure-cloud-investigation" target="_blank" rel="noopener noreferrer">Microsoft investigates Israeli military’s use of Azure cloud storage</a></td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td>2025.08.07</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/8/7/%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D9%84%D9%84%D8%A5%D8%A8%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%A5%D9%86%D8%B3%D8%A7%D9%86%D9%8A%D8%A9-%D8%BA%D8%B6%D8%A8-%D9%88%D8%A7%D8%B3%D8%B9" target="_blank" rel="noopener noreferrer">"تكنولوجيا الإبادة".. غضب واسع من تعاون مايكروسوفت مع إسرائيل بالتجسس على الفلسطينيين</a></td>
+    </tr>
+    <tr>
+      <td>54</td>
+      <td>2025.08.06</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/8/6/%D9%85%D9%84%D9%8A%D9%88%D9%86-%D9%85%D9%83%D8%A7%D9%84%D9%85%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%A7%D8%B9%D8%A9-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA" target="_blank" rel="noopener noreferrer">"مليون مكالمة بالساعة".. مايكروسوفت تساعد جيش إسرائيل في التجسس على الفلسطينيين</a></td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>2025.08.06</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/aug/06/microsoft-israeli-military-palestinian-phone-calls-cloud" target="_blank" rel="noopener noreferrer">A million calls an hour’: Israel relying on Microsoft cloud for expansive surveillance of Palestinians</a></td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>2025.08.06</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/8/6/%D9%85%D9%84%D9%8A%D9%88%D9%86-%D9%85%D9%83%D8%A7%D9%84%D9%85%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%A7%D8%B9%D8%A9-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA" target="_blank" rel="noopener noreferrer">"مليون مكالمة بالساعة".. مايكروسوفت تساعد جيش إسرائيل في التجسس على الفلسطينيين</a></td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>2025.08.06</td>
+      <td>جيروزليم بوست</td>
+      <td><a href="https://www.jpost.com/israel-news/article-863469" target="_blank" rel="noopener noreferrer">IDF, Microsoft collaborated on cloud megastorage project for Palestinian surveillance - report</a></td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>2025.08.01</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/8/1/%D9%83%D8%A7%D8%AA%D8%A8%D8%A9-%D8%A8%D8%B1%D9%8A%D8%B7%D8%A7%D9%86%D9%8A%D8%A9-%D8%B9%D8%A7%D8%A6%D8%AF%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA" target="_blank" rel="noopener noreferrer">كاتبة بريطانية: شركات أميركية تستغل غزة لزيادة أرباحها</a></td>
+    </tr>
+    <tr>
+      <td>59</td>
+      <td>2025.07.23</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/7/23/%D9%85%D8%A6%D8%A9-%D9%85%D9%86-%D9%85%D9%88%D8%B8%D9%81%D9%8A-%D8%A7%D9%84%D8%AF%D8%B9%D9%85-%D8%A7%D9%84%D9%81%D9%86%D9%8A-%D9%81%D9%8A-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA" target="_blank" rel="noopener noreferrer">100 موظف من مايكروسوفت يتعهدون بعدم الرد على طلبات إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>2025.07.13</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/7/13/%D9%85%D8%B3%D8%AA%D8%AB%D9%85%D8%B1%D9%88-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%BA%D8%A7%D8%B6%D8%A8%D9%88%D9%86-%D9%88%D8%A7%D9%84%D8%B3%D8%A8%D8%A8" target="_blank" rel="noopener noreferrer">مستثمرو "مايكروسوفت" غاضبون والسبب إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>61</td>
+      <td>2025.07.04</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/7/4/%D8%A3%D9%84%D8%A8%D8%A7%D9%86%D9%8A%D8%B2-%D8%AA%D9%81%D8%B6%D8%AD-%D8%AA%D9%88%D8%B1%D8%B7-60-%D8%B4%D8%B1%D9%83%D8%A9-%D8%B9%D8%A7%D9%84%D9%85%D9%8A%D8%A9-%D9%81%D9%8A" target="_blank" rel="noopener noreferrer">ألبانيز تفضح تورط 60 شركة عالمية في إبادة غزة.. هل من تأثير؟</a></td>
+    </tr>
+    <tr>
+      <td>62</td>
+      <td>2025.06.21</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/6/21/%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D8%B3%D8%AA%D9%82%D8%A7%D9%84%D8%A9-%D9%85%D9%87%D9%86%D8%AF%D8%B3%D8%A9-%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%85%D9%86" target="_blank" rel="noopener noreferrer">رسالة استقالة مهندسة مصرية من "مايكروسوفت" تجدد الجدل حول دور الشركة في حرب غزة</a></td>
+    </tr>
+    <tr>
+      <td>63</td>
+      <td>2025.06.19</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2025/6/19/%D8%B4%D8%A7%D9%87%D8%AF-%D9%85%D8%AD%D8%AA%D8%AC%D9%88%D9%86-%D9%8A%D8%B7%D8%B1%D8%AF%D9%88%D9%86-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%85%D9%86" target="_blank" rel="noopener noreferrer">شاهد: محتجون يطردون "مايكروسوفت" من مؤتمرها بسبب غزة</a></td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>2025.06.11</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/jun/11/big-tech-muslim-workers-gaza-israel" target="_blank" rel="noopener noreferrer">As big tech grows more involved in Gaza, Muslim workers are wrestling with a spiritual crisis</a></td>
+    </tr>
+    <tr>
+      <td>65</td>
+      <td>2025.06.10</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/6/10/%D8%B4%D8%A7%D9%87%D8%AF-%D9%85%D9%88%D8%B8%D9%81-%D8%A2%D8%A8%D9%84-%D9%8A%D8%B1%D8%AA%D8%AF%D9%8A-%D8%A7%D9%84%D9%83%D9%88%D9%81%D9%8A%D8%A9-%D9%88%D9%8A%D9%82%D8%B7%D8%B9" target="_blank" rel="noopener noreferrer">شاهد.. متظاهر يقطع مؤتمر آبل للمطورين نصرة لفلسطين</a></td>
+    </tr>
+    <tr>
+      <td>66</td>
+      <td>2025.06.05</td>
+      <td>فرتشافتس فوخه</td>
+      <td><a href="https://www.wiwo.de/unternehmen/it/nach-kontosperrung-auf-trump-anweisung-microsofts-loesung-fuer-das-trump-problem/100132479.html" target="_blank" rel="noopener noreferrer">Microsofts Lösung für das Trump-Problem</a></td>
+    </tr>
+    <tr>
+      <td>67</td>
+      <td>2025.06.04</td>
+      <td>بوليتيكو</td>
+      <td><a href="https://www.politico.eu/article/microsoft-did-not-cut-services-international-criminal-court-president-american-sanctions-trump-tech-icc-amazon-google/" target="_blank" rel="noopener noreferrer">Microsoft didn’t cut services to International Criminal Court, its president says</a></td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>2025.05.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/5/28/%D9%88%D8%A7%D8%B4%D9%86%D8%B7%D9%86-%D8%AA%D9%81%D8%B1%D8%B6-%D9%82%D9%8A%D9%88%D8%AF%D8%A7-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%B9%D9%84-%D8%AA%D8%A3%D8%B4%D9%8A%D8%B1%D8%A7%D8%AA" target="_blank" rel="noopener noreferrer">واشنطن تفرض قيودا جديدة على تأشيرات مسؤولين أجانب</a></td>
+    </tr>
+    <tr>
+      <td>69</td>
+      <td>2025.05.22</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/5/22/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D8%AD%D8%B8%D8%B1-%D9%83%D9%84%D9%85%D8%A7%D8%AA-%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86-%D9%88%D8%BA%D8%B2%D8%A9" target="_blank" rel="noopener noreferrer">مايكروسوفت تحظر كلمات فلسطين وغزة والإبادة في بريدها الإلكتروني</a></td>
+    </tr>
+    <tr>
+      <td>70</td>
+      <td>2025.05.19</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/may/19/microsoft-ceo-speech-palestinian-protest" target="_blank" rel="noopener noreferrer">Microsoft employee interrupts CEO’s keynote with pro-Palestinian protest</a></td>
+    </tr>
+    <tr>
+      <td>71</td>
+      <td>2025.05.15</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://blogs.microsoft.com/on-the-issues/2025/05/15/statement-technology-israel-gaza/" target="_blank" rel="noopener noreferrer">Microsoft statement on the issues relating to technology services in Israel and Gaza</a></td>
+    </tr>
+    <tr>
+      <td>72</td>
+      <td>2025.05.15</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://blogs.microsoft.com/on-the-issues/2025/05/15/statement-technology-israel-gaza/" target="_blank" rel="noopener noreferrer">Microsoft statement on the issues relating to technology services in Israel and Gaza</a></td>
+    </tr>
+    <tr>
+      <td>73</td>
+      <td>2025.05.15</td>
+      <td>أسوشيتد برس</td>
+      <td><a href="https://apnews.com/article/icc-trump-sanctions-karim-khan-court-a4b4c02751ab84c09718b1b95cbd5db3" target="_blank" rel="noopener noreferrer">Trump’s sanctions on ICC prosecutor have halted tribunal’s work</a></td>
+    </tr>
+    <tr>
+      <td>74</td>
+      <td>2025.04.30</td>
+      <td>بوليتيكو</td>
+      <td><a href="https://www.politico.eu/article/microsoft-pitches-european-data-center-expansion-amid-tense-transatlantic-tech-ties/" target="_blank" rel="noopener noreferrer">Microsoft would push back against Trump order to suspend European cloud operations</a></td>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>2025.04.26</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/4/26/%D9%86%D9%8A%D9%88%D9%8A%D9%88%D8%B1%D9%83-%D8%AA%D8%A7%D9%8A%D9%85%D8%B2-%D8%AA%D8%AC%D8%A7%D8%B1%D8%A8-%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1-%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A" target="_blank" rel="noopener noreferrer">نيويورك تايمز: تجارب الذكاء الاصطناعي الإسرائيلية في حرب غزة تثير مخاوف أخلاقية</a></td>
+    </tr>
+    <tr>
+      <td>76</td>
+      <td>2025.04.25</td>
+      <td>نيويورك تايمز</td>
+      <td><a href="https://www.nytimes.com/2025/04/25/technology/israel-gaza-ai.html" target="_blank" rel="noopener noreferrer">Israel’s AI Experiments in Gaza War Raise Ethical Concerns”</a></td>
+    </tr>
+    <tr>
+      <td>77</td>
+      <td>2025.04.18</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/apr/18/microsoft-ai-israel-gaza-war" target="_blank" rel="noopener noreferrer">Microsoft faces growing unrest over role in Israel’s war on Gaza: ‘Close to a tipping point’</a></td>
+    </tr>
+    <tr>
+      <td>78</td>
+      <td>2025.04.17</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/opinions/2025/4/17/%D8%A7%D8%A8%D9%86-%D9%85%D9%8A%D9%85%D9%88%D9%86-%D9%88%D8%A7%D8%A8%D8%AA%D9%87%D8%A7%D9%84-%D8%A3%D8%A8%D9%88-%D8%A7%D9%84%D8%B3%D8%B9%D8%AF-%D8%AD%D9%83%D8%A7%D9%8A%D8%AA%D8%A7%D9%86-%D9%81%D9%8A" target="_blank" rel="noopener noreferrer">ابن ميمون وابتهال أبو السعد: حكايتان في مواجهة سلطة واحدة</a></td>
+    </tr>
+    <tr>
+      <td>79</td>
+      <td>2025.04.12</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/4/12/%D9%85%D9%88%D8%B8%D9%81-%D9%81%D8%B5%D9%84%D8%AA%D9%87-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%8A%D9%83%D8%B4%D9%81-%D9%84%D9%84%D8%AC%D8%B2%D9%8A%D8%B1%D8%A9-%D9%86%D8%AA" target="_blank" rel="noopener noreferrer">موظف فصلته مايكروسوفت يكشف للجزيرة نت كيف تلطخت الشركة بدماء غزة</a></td>
+    </tr>
+    <tr>
+      <td>80</td>
+      <td>2025.04.10</td>
+      <td>ميدل إيست أي</td>
+      <td><a href="https://www.middleeasteye.net/news/inside-campaign-end-microsofts-collaboration-israeli-army" target="_blank" rel="noopener noreferrer">Inside the campaign to end Microsoft's collaboration with the Israeli army</a></td>
+    </tr>
+    <tr>
+      <td>81</td>
+      <td>2025.04.09</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/encyclopedia/2025/4/9/%D9%81%D8%A7%D9%86%D9%8A%D8%A7-%D8%A3%D8%BA%D8%B1%D8%A7%D9%88%D8%A7%D9%84-%D9%85%D9%87%D9%86%D8%AF%D8%B3%D8%A9-%D9%87%D9%86%D8%AF%D9%8A%D8%A9-%D8%BA%D8%A7%D8%AF%D8%B1%D8%AA" target="_blank" rel="noopener noreferrer">فانيا أغراوال.. مهندسة هندية غادرت مايكروسوفت انتصارا لغزة</a></td>
+    </tr>
+    <tr>
+      <td>82</td>
+      <td>2025.04.08</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/4/8/%D8%B9%D8%A7%D8%AC%D9%84-%D8%B3%D9%8A-%D8%A5%D9%86-%D8%A8%D9%8A-%D8%B3%D9%8A-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%AA%D9%81%D8%B5%D9%84" target="_blank" rel="noopener noreferrer">مايكروسوفت تفصل المهندسة ابتهال أبو السعد بعد احتجاجها على التواطؤ مع إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>83</td>
+      <td>2025.04.08</td>
+      <td>بوليجون</td>
+      <td><a href="https://www.polygon.com/news/554879/bds-palestine-israel-xbox-microsoft-boycott-candy-crush-minecraft-call-of-duty/" target="_blank" rel="noopener noreferrer">Palestinian-led BDS movement adds Microsoft’s Xbox as priority boycott target</a></td>
+    </tr>
+    <tr>
+      <td>84</td>
+      <td>2025.04.07</td>
+      <td>حركة مقاطعة اسرائيل</td>
+      <td><a href="https://www.bdsmovement.net/news/boycott-microsofts-xbox" target="_blank" rel="noopener noreferrer">Boycott Microsoft's Xbox</a></td>
+    </tr>
+    <tr>
+      <td>85</td>
+      <td>2025.04.05</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/4/5/%D8%B9%D8%A7%D8%B1-%D8%B9%D9%84%D9%8A%D9%83-%D9%85%D9%88%D8%B8%D9%81%D8%A9-%D8%AA%D9%82%D8%A7%D8%B7%D8%B9-%D9%85%D8%B3%D8%A4%D9%88%D9%84%D8%A7" target="_blank" rel="noopener noreferrer">"عار عليك".. موظفة تقاطع مسؤولا بمايكروسوفت احتجاجا على دعم الإبادة بغزة</a></td>
+    </tr>
+    <tr>
+      <td>86</td>
+      <td>2025.04.05</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/4/5/%D8%A7%D8%A8%D8%AA%D9%87%D8%A7%D9%84-%D8%A3%D8%A8%D9%88-%D8%A7%D9%84%D8%B3%D8%B9%D8%AF-%D9%85%D8%BA%D8%B1%D8%A8%D9%8A%D8%A9-%D8%AA%D8%B6%D8%AD%D9%8A-%D8%A8%D9%88%D8%B8%D9%8A%D9%81%D8%AA%D9%87%D8%A7" target="_blank" rel="noopener noreferrer">مواقع التواصل تحتفي بالمغربية ابتهال أبو سعد مبرمجة مايكروسوفت</a></td>
+    </tr>
+    <tr>
+      <td>87</td>
+      <td>2025.04.05</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2025/4/5/%D8%AD%D9%85%D8%A7%D8%B3-%D8%AA%D8%B4%D9%8A%D8%AF-%D8%A8%D8%B4%D8%AC%D8%A7%D8%B9%D8%A9-%D9%85%D8%A8%D8%B1%D9%85%D8%AC%D8%A9-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA" target="_blank" rel="noopener noreferrer">حماس تشيد بشجاعة مبرمجة مايكروسوفت المغربية ابتهال أبو سعد</a></td>
+    </tr>
+    <tr>
+      <td>88</td>
+      <td>2025.04.05</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/encyclopedia/2025/4/5/%D9%85%D8%B5%D8%B7%D9%81%D9%89-%D8%B3%D9%84%D9%8A%D9%85%D8%A7%D9%86-%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A-%D9%84%D9%82%D8%B7%D8%A7%D8%B9" target="_blank" rel="noopener noreferrer">مصطفى سليمان المدير التنفيذي لقطاع الذكاء الاصطناعي في مايكروسوفت</a></td>
+    </tr>
+    <tr>
+      <td>89</td>
+      <td>2025.04.05</td>
+      <td>عربي21</td>
+      <td><a href="https://arabi21.com/story/1672838/%D8%B0%D9%83%D8%A7%D8%A1-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A-%D9%81%D9%8A-%D8%AE%D8%AF%D9%85%D8%A9-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84-%D8%A3%D8%B5%D9%88%D8%A7%D8%AA-%D8%B1%D8%A7%D9%81%D8%B6%D8%A9-%D8%AA%D8%AF%D9%81%D8%B9-%D8%A7%D9%84%D8%AB%D9%85%D9%86" target="_blank" rel="noopener noreferrer">ذكاء مايكروسوفت الاصطناعي في خدمة "إسرائيل": أصوات رافضة تدفع الثمن</a></td>
+    </tr>
+    <tr>
+      <td>90</td>
+      <td>2025.04.04</td>
+      <td>ذا فيرج</td>
+      <td><a href="https://www.theverge.com/news/643777/microsoft-bill-gates-steve-ballmer-satya-nadella-employee-protestor" target="_blank" rel="noopener noreferrer">Microsoft CEOs interrupted by another employee protestor: ‘shame on all of you’</a></td>
+    </tr>
+    <tr>
+      <td>91</td>
+      <td>2025.03.06</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/mar/06/israel-military-ai-surveillance" target="_blank" rel="noopener noreferrer">Revealed: Israeli military creating ChatGPT-like tool using vast collection of Palestinian surveillance data</a></td>
+    </tr>
+    <tr>
+      <td>92</td>
+      <td>2025.02.18</td>
+      <td>أسوشيتد برس</td>
+      <td><a href="https://apnews.com/article/israel-palestinians-ai-technology-737bc17af7b03e98c29cec4e15d0f108" target="_blank" rel="noopener noreferrer">As Israel uses US-made AI models in war, concerns arise about tech’s role in who lives and who dies</a></td>
+    </tr>
+    <tr>
+      <td>93</td>
+      <td>2025.02.07</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/us-news/2025/feb/06/trump-sanction-icc" target="_blank" rel="noopener noreferrer">Trump imposes sanctions on ICC, accusing it of targeting US and Israel</a></td>
+    </tr>
+    <tr>
+      <td>94</td>
+      <td>2025.02.06</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2025/2/6/%D9%84%D9%82%D8%B5%D9%81-%D8%BA%D8%B2%D8%A9-%D8%A7%D8%B6%D8%BA%D8%B7-%D9%87%D9%86%D8%A7-%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%BA%D9%88%D8%BA%D9%84" target="_blank" rel="noopener noreferrer">ما الدوافع التي جعلت ابتهال أبو السعد تهاجم ميكروسوفت؟</a></td>
+    </tr>
+    <tr>
+      <td>95</td>
+      <td>2025.02.06</td>
+      <td>البيت الأبيض</td>
+      <td><a href="https://www.whitehouse.gov/presidential-actions/2025/02/imposing-sanctions-on-the-international-criminal-court/" target="_blank" rel="noopener noreferrer">IMPOSING SANCTIONS ON THE INTERNATIONAL CRIMINAL COURT</a></td>
+    </tr>
+    <tr>
+      <td>96</td>
+      <td>2025.01.28</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/longform/2025/1/28/%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%BA%D9%88%D8%BA%D9%84-%D8%AC%D8%B1%D8%A7%D8%A6%D9%85-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84-%D8%BA%D8%B2%D8%A9" target="_blank" rel="noopener noreferrer">ليست غوغل وحدها.. الشركات الغربية تغذي آلة القتل الإسرائيلية</a></td>
+    </tr>
+    <tr>
+      <td>97</td>
+      <td>2025.01.23</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2025/jan/23/israeli-military-gaza-war-microsoft" target="_blank" rel="noopener noreferrer">Revealed: Microsoft deepened ties with Israeli military to provide tech support during Gaza war</a></td>
+    </tr>
+    <tr>
+      <td>98</td>
+      <td>2025.01.23</td>
+      <td>دروب سايت</td>
+      <td><a href="https://www.dropsitenews.com/p/microsoft-azure-israel-top-customer-ai-cloud" target="_blank" rel="noopener noreferrer">The Israeli Military Is One of Microsoft's Top AI Customers, Leaked Documents Reveal</a></td>
+    </tr>
+    <tr>
+      <td>99</td>
+      <td>2025.01.02</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2025/jan/01/muslim-friendly-websites-apps" target="_blank" rel="noopener noreferrer">Halal tech: how Muslim-friendly websites and apps blossomed in 2024</a></td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>2024.12.31</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/ebusiness/2024/12/31/%D9%81%D8%B4%D9%84-%D9%85%D8%AD%D8%A7%D8%AF%D8%AB%D8%A7%D8%AA-%D8%A8%D9%86%D8%A7%D8%A1-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8-%D8%A7%D9%84%D8%B9%D9%85%D9%84%D8%A7%D9%82-%D8%A8%D9%8A%D9%86" target="_blank" rel="noopener noreferrer">فشل محادثات بناء الحاسوب العملاق بين إسرائيل وأمازون وغوغل</a></td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2024.12.05</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2024/12/5/%D9%86%D9%8A%D9%88%D9%8A%D9%88%D8%B1%D9%83-%D8%AA%D8%A7%D9%8A%D9%85%D8%B2-%D8%AA%D9%83%D8%B4%D9%81-%D9%83%D9%8A%D9%81-%D8%AE%D8%A7%D9%84%D9%81%D8%AA-%D8%BA%D9%88%D8%BA%D9%84" target="_blank" rel="noopener noreferrer">"نيويورك تايمز" تكشف كيف خالفت غوغل قوانينها وسياساتها ومستشاريها لصالح إسرائيل</a></td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>2024.11.19</td>
+      <td>أسوشيتد برس</td>
+      <td><a href="https://apnews.com/article/israel-palestinians-ai-technology-microsoft-gaza-lebanon-90541d4130d4900c719d34ebcd67179d" target="_blank" rel="noopener noreferrer">Microsoft workers protest sale of AI and cloud services to Israeli military</a></td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>2024.11.02</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/us-news/2024/nov/02/microsoft-workers-fired-gaza-vigil" target="_blank" rel="noopener noreferrer">Microsoft workers fired over Gaza vigil say company ‘crumbled under pressure’</a></td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>2024.10.09</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/politics/2024/10/9/%D9%85%D8%A7-%D9%85%D8%B3%D8%A4%D9%88%D9%84%D9%8A%D8%A9-%D8%B4%D8%B1%D9%83%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%B9%D9%86-%D9%85%D8%AC%D8%A7%D8%B2%D8%B1" target="_blank" rel="noopener noreferrer">ما مسؤولية شركات التكنولوجيا عن مجازر إسرائيل في غزة؟</a></td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>2024.05.28</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/article/2024/may/28/spying-hacking-intimidation-israel-war-icc-exposed" target="_blank" rel="noopener noreferrer">Spying, hacking and intimidation: Israel’s nine-year ‘war’ on the ICC exposed</a></td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>2024.05.21</td>
+      <td>بلوج "لا تقنية لدولة الفصل العنصري"</td>
+      <td><a href="https://medium.com/@notechforapartheid/a-marriage-made-in-hell-an-introduction-to-microsofts-complicity-in-apartheid-and-genocide-d7dfad65a196" target="_blank" rel="noopener noreferrer">A Marriage Made in Hell: An Introduction to Microsoft’s Complicity in Apartheid and Genocide</a></td>
+    </tr>
+    <tr>
+      <td>107</td>
+      <td>2024.04.03</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2024/apr/03/israel-gaza-ai-database-hamas-airstrikes" target="_blank" rel="noopener noreferrer">‘The machine did it coldly’: Israel used AI to identify 37,000 Hamas targets</a></td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>2023.12.01</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/world/2023/dec/01/the-gospel-how-israel-uses-ai-to-select-bombing-targets" target="_blank" rel="noopener noreferrer">‘The Gospel’: how Israel uses AI to select bombing targets in Gaza</a></td>
+    </tr>
+    <tr>
+      <td>109</td>
+      <td>2023.11.30</td>
+      <td>مجلة +972</td>
+      <td><a href="https://www.972mag.com/mass-assassination-factory-israel-calculated-bombing-gaza/" target="_blank" rel="noopener noreferrer">‘A mass assassination factory’: Inside Israel’s calculated bombing of Gaza</a></td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>2023.11.24</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2023/11/24/%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-%D8%B9%D8%B3%D9%83%D8%B1%D9%8A%D8%A9-%D9%88%D8%A3%D9%85%D9%86%D9%8A%D8%A9-%D8%A7%D8%B3%D8%AA%D9%8A%D8%B7%D8%A7%D9%86%D9%8A%D8%A9-%D9%83%D9%8A%D9%81-2" target="_blank" rel="noopener noreferrer">مشاريع عسكرية وأمنية استيطانية.. كيف تعزز الشركات التقنية العالمية الوجود الإسرائيلي؟</a></td>
+    </tr>
+    <tr>
+      <td>111</td>
+      <td>2023.11.08</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2023/11/8/%D8%BA%D9%88%D8%BA%D9%84-%D9%88%D8%A3%D9%85%D8%A7%D8%B2%D9%88%D9%86-%D9%88%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%83%D9%8A%D9%81-%D8%AA%D8%AF%D8%B9%D9%85" target="_blank" rel="noopener noreferrer">غوغل وأمازون ومايكروسوفت.. كيف تدعم شركات التقنية الكبرى الاحتلال الإسرائيلي؟</a></td>
+    </tr>
+	<tr>
+      <td>112</td>
+      <td>2023.08.28</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://www.microsoft.com/en/customers/story/1673479702616864063-orca-security-professional-services-azure-en-israel" target="_blank" rel="noopener noreferrer">Orca Security combines the power of GPT-4 with the security and reliability of Microsoft Azure</a></td>
+    </tr>
+    <tr>
+      <td>113</td>
+      <td>2021.03.21</td>
+      <td>الملتقى الفلسطيني</td>
+      <td><a href="https://www.palestineforum.net/%D9%83%D9%8A%D9%81-%D8%AA%D8%B3%D8%AA%D8%AB%D9%85%D8%B1-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D9%81%D9%8A-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B9%D9%85%D8%A7%D8%B1-%D8%A7%D9%84/" target="_blank" rel="noopener noreferrer">كيف تستثمر مايكروسوفت في الاستعمار الاستيطاني الإسرائيلي – ترجمة غير رسمية</a></td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>2020.12.18</td>
+      <td>الجارديان</td>
+      <td><a href="https://www.theguardian.com/technology/2020/dec/18/nso-group-microsoft-biden-whatsapp-cyber-attack" target="_blank" rel="noopener noreferrer">Microsoft seeks Biden's support in case against Israeli spyware firm</a></td>
+    </tr>
+    <tr>
+      <td>115</td>
+      <td>2020.07.16</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/news/2020/7/16/%D8%A5%D9%86%D8%AA%D8%B1%D8%B3%D8%A8%D8%AA-%D8%AF%D9%88%D9%84%D8%A9-%D9%85%D8%A7%D9%8A%D9%83%D8%B1%D9%88%D8%B3%D9%88%D9%81%D8%AA-%D8%A7%D9%84%D8%A8%D9%88%D9%84%D9%8A%D8%B3%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer">إنترسبت: دولة مايكروسوفت البوليسية.. مراقبة جماعية بأدوات قمعية</a></td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>2020.07.14</td>
+      <td>الإنترسيبت</td>
+      <td><a href="https://theintercept.com/2020/07/14/microsoft-police-state-mass-surveillance-facial-recognition/" target="_blank" rel="noopener noreferrer">The Microsoft Police State: Mass Surveillance, Facial Recognition, and the Azure Cloud</a></td>
+    </tr>
+    <tr>
+      <td>117</td>
+      <td>2020.05.15</td>
+      <td>الجزيرة</td>
+      <td><a href="https://www.aljazeera.net/tech/2020/5/15/%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D9%88%D9%86-%D9%8A%D8%AA%D8%B7%D9%84%D8%B9%D9%88%D9%86-%D9%84%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7" target="_blank" rel="noopener noreferrer">في ذكرى النكبة.. الفلسطينيون يتطلعون إلى التكنولوجيا الرقمية للتواصل مع ماضيهم</a></td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>2020.01.22</td>
+      <td>مايكروسوفت</td>
+      <td><a href="https://news.microsoft.com/source/emea/features/microsoft-to-launch-new-cloud-datacenter-region-in-israel/" target="_blank" rel="noopener noreferrer">Microsoft to launch new cloud datacenter region in Israel</a></td>
+    </tr>
+    <tr>
+      <td>119</td>
+      <td>2016.02.26</td>
+      <td>عروتس شيفع</td>
+      <td><a href="https://www.israelnationalnews.com/news/208568" target="_blank" rel="noopener noreferrer">Israel and Microsoft 'a marriage made in heaven'</a></td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>2008.05.22</td>
+      <td>جيروساليم بوست</td>
+      <td><a href="https://www.jpost.com/business/business-features/article-101938" target="_blank" rel="noopener noreferrer">'Microsoft is Israeli almost as much it is American'</a></td>
+    </tr>
+    <tr>
+      <td>121</td>
+      <td>2008.05.21</td>
+      <td>هارتس</td>
+      <td><a href="https://www.haaretz.com/2008-05-21/ty-article/microsoft-ceo-in-herzliya-our-company-almost-as-israeli-as-american/0000017f-e2f6-d9aa-afff-fbfe2de30000" target="_blank" rel="noopener noreferrer">Microsoft CEO, in Herzliya: Our Company Almost as Israeli as American</a></td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>2002.04.12</td>
+      <td>حركة جش شالوم</td>
+      <td><a href="https://www.inminds.com/boycott-news-0022.html" target="_blank" rel="noopener noreferrer">Gush Shalom Speaker Adam keller's letter to Bill Gates</a></td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>2002.12.08</td>
+      <td>واي نت</td>
+      <td><a href="https://www.ynet.co.il/articles/0,7340,L-2302074,00.html" target="_blank" rel="noopener noreferrer">מיקרוסופט: הסכם ב-100 מיליון ש' עם משהב"ט</a></td>
+    </tr>
+      </tbody>	
+    </table>
+  </div>
+</div>
+
+    
+    <div class="section">
+      <h2>وسوم ذات صلة</h2>
+      <div class="related-items">
+	<div class="item">#NoAzureForApartheid</div>
+        <div class="item">#NoGamesForApartheid</div>
+        <div class="item">#NoTechForApartheid</div>
+        <div class="item">#BoycottMicrosoft</div>
+      </div>
+    </div>
+
+  
+    	    </div>
+  </div>
+<div id="lightbox" class="lightbox" style="display:none;" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="" alt="">
+  <video id="lightbox-video" controls style="display:none;"></video>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxVideo = document.getElementById('lightbox-video');
+
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', function() {
+      lightboxImg.src = this.src;
+      lightboxImg.style.display = 'block';
+      lightboxVideo.style.display = 'none';
+      lightbox.style.display = 'flex';
+    });
+  });
+
+  document.querySelectorAll('.gallery video').forEach(video => {
+    video.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      lightboxImg.style.display = 'none';
+      lightboxVideo.src = this.querySelector('source').src;
+      lightboxVideo.style.display = 'block';
+      lightbox.style.display = 'flex';
+    });
+  });
+</script>
+</body>
+</html>
